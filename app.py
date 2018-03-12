@@ -5,7 +5,7 @@ app = Flask(__name__)
 BASE_URL = "https://www.travys.ch/wp-json/travys_tiramisu/v1/iv/lines"
 ICON = "i19110"
 
-def getData(line, stop, direction):
+def getData(line, direction):
     url = BASE_URL + "/{}/{}".format(line, direction)
     http = urllib3.PoolManager()
     headers = urllib3.util.make_headers(keep_alive=True, accept_encoding=True, user_agent="LameEtTrique/1.0")
@@ -35,7 +35,7 @@ def lame_et_trique():
         texts.append("Données fournies incorrectes.")
     else:
         direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
-        json_file = getData(line, stop, direction)
+        json_file = getData(line, direction)
 
         for value in json_file:
             if str(value['name']) == str(stop):
@@ -50,18 +50,15 @@ def lame_et_trique():
 
     return(json.dumps(getPayload(texts)))
 
-@app.route("/stops")
-def get_stops():
+@app.route("/<line>/<direction>/stops")
+def get_stops(line=None, direction=None):
     stops = ""
 
-    line = request.args.get('line')
-    stop = request.args.get('stop')
-
-    if not line or not stop:
+    if not line:
         return 'Données manquantes !', 422
 
-    direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
-    json_file = getData(line, stop, direction)
+    direction = direction if not direction else 'forward'
+    json_file = getData(line, direction)
 
     for value in json_file:
         stops.append(str(value['name']) + "<br />")
