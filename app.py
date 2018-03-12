@@ -10,7 +10,7 @@ def hello():
     line = request.args.get('line')
     stop = request.args.get('stop')
 
-    if len(line) == 0 or len(stop) == 0:
+    if not line or not stop:
         return '', 422
 
     direction = request.args.get('direction') if len(request.args.get('direction')) > 0 else 'forward'
