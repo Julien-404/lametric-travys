@@ -1,0 +1,10 @@
+[[source]]
+name = 'lametric-travys'
+
+[requires]
+python_version = "3.6"
+
+[packages]
+flask = '*'
+urllib3 = '*'
+gunicorn = '*'
