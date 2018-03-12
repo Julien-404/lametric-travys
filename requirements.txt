@@ -1,0 +1,8 @@
+[packages]
+flask = "*"
+urllib3 = "*"
+json = "*"
+ssl = "*"
+
+[requires]
+python_version = "3.6"⏎
