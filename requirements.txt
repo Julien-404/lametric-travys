@@ -1,2 +1,2 @@
-flask = "*"
-urllib3 = "*"
+flask=="*"
+urllib3=="*"
