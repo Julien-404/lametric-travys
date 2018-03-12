@@ -9,4 +9,3 @@ python_version = '3.6'
 [packages]
 flask = "*"
 urllib3 = "*"
-gunicorn = "*"
