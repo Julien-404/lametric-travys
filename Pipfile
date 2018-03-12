@@ -5,6 +5,6 @@ name = 'lametric-travys'
 python_version = "3.6"
 
 [packages]
-flask = '*'
-urllib3 = '*'
-gunicorn = '*'
+flask = '>0.12'
+urllib3 = '>1.5'
+gunicorn = '>19.7'
