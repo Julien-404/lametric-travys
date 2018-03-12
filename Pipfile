@@ -7,6 +7,6 @@ name = 'lametricTravys'
 python_version = '3.6'
 
 [packages]
-flask = '>0.12'
-urllib3 = '>1.5'
-gunicorn = '>19.7'
+flask = '*'
+urllib3 = '*'
+gunicorn = '*'
