@@ -16,7 +16,7 @@ def hello():
     if not line or not stop:
         texts.append("Données fournies incorrectes.")
 
-    direction = request.args.get('direction') if len(request.args.get('direction')) > 0 else 'forward'
+    direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
     url = BASE_URL + "/{}/{}".format(line, direction)
     http = urllib3.PoolManager()
     headers = urllib3.util.make_headers(keep_alive=True, accept_encoding=True, user_agent="LameEtTrique/1.0")
