@@ -1,8 +1,8 @@
 [[source]]
-name = 'lametric-travys'
+name = 'lametricTravys'
 
 [requires]
-python_version = "3.6"
+python_version = '3.6'
 
 [packages]
 flask = '>0.12'
