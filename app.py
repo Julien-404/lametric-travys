@@ -6,7 +6,7 @@ BASE_URL = "https://www.travys.ch/wp-json/travys_tiramisu/v1/iv/lines"
 ICON = "i19110"
 
 @app.route("/")
-def hello():
+def lame_et_trique():
     texts = []
     schedule = dict()
 
@@ -15,24 +15,24 @@ def hello():
 
     if not line or not stop:
         texts.append("Données fournies incorrectes.")
-
-    direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
-    url = BASE_URL + "/{}/{}".format(line, direction)
-    http = urllib3.PoolManager()
-    headers = urllib3.util.make_headers(keep_alive=True, accept_encoding=True, user_agent="LameEtTrique/1.0")
-    req = http.request('GET', url, headers=headers)
-    json_file = json.loads(req.data.decode('utf-8'))['line']['stops']
-
-    for value in json_file:
-        if str(value['name']) == str(stop):
-            schedule = value
-            break
-
-    if len(schedule) > 0 and len(schedule['next_departures']) > 0:
-        texts.append("Ligne {}, arrêt {}".format(line, stop))
-        texts.append("Prochain bus dans {} min".format(schedule['next_departures'][0]['calculatedValue'])) 
     else:
-        texts.append("Pas de correspondance pour la ligne {}, à l'arrêt {}".format(line, stop))
+        direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
+        url = BASE_URL + "/{}/{}".format(line, direction)
+        http = urllib3.PoolManager()
+        headers = urllib3.util.make_headers(keep_alive=True, accept_encoding=True, user_agent="LameEtTrique/1.0")
+        req = http.request('GET', url, headers=headers)
+        json_file = json.loads(req.data.decode('utf-8'))['line']['stops']
+
+        for value in json_file:
+            if str(value['name']) == str(stop):
+                schedule = value
+                break
+
+        if len(schedule) > 0 and len(schedule['next_departures']) > 0:
+            texts.append("Ligne {}, arrêt {}".format(line, stop))
+            texts.append("Prochain bus dans {} min".format(schedule['next_departures'][0]['calculatedValue'])) 
+        else:
+            texts.append("Pas de correspondance pour la ligne {}, à l'arrêt {}".format(line, stop))
 
     payload = { "frames": [] }
     for value in texts:
