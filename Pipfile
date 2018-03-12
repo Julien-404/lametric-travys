@@ -1,4 +1,6 @@
 [[source]]
+url = 'https://github.com/Julien-404/lametric-travys'
+verify_ssl = false
 name = 'lametricTravys'
 
 [requires]
