@@ -7,16 +7,17 @@ ICON = "i19110"
 
 @app.route("/")
 def hello():
+    texts = []
+    schedule = dict()
+
     line = request.args.get('line')
     stop = request.args.get('stop')
 
     if not line or not stop:
-        return '', 422
+        texts.append("Données fournies incorrectes.")
 
     direction = request.args.get('direction') if len(request.args.get('direction')) > 0 else 'forward'
     url = BASE_URL + "/{}/{}".format(line, direction)
-
-    schedule = dict()
     http = urllib3.PoolManager()
     headers = urllib3.util.make_headers(keep_alive=True, accept_encoding=True, user_agent="LameEtTrique/1.0")
     req = http.request('GET', url, headers=headers)
@@ -27,7 +28,6 @@ def hello():
             schedule = value
             break
 
-    texts = []
     if len(schedule) > 0 and len(schedule['next_departures']) > 0:
         texts.append("Ligne {}, arrêt {}".format(line, stop))
         texts.append("Prochain bus dans {} min".format(schedule['next_departures'][0]['calculatedValue'])) 
