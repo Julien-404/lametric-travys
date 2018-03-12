@@ -8,8 +8,12 @@ ICON = "i19110"
 @app.route("/")
 def hello():
     line = request.args.get('line')
-    direction = request.args.get('direction') if len(request.args.get('direction')) > 0 else 'forward'
     stop = request.args.get('stop')
+
+    if len(line) == 0 or len(stop) == 0:
+        return '', 422
+
+    direction = request.args.get('direction') if len(request.args.get('direction')) > 0 else 'forward'
     url = BASE_URL + "/{}/{}".format(line, direction)
 
     schedule = dict()
