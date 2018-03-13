@@ -59,7 +59,7 @@ def get_stops(line=None):
 
     direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
 
-    return "line: " + str(line) + ", direction: " + str(direction)
+    return "line: " + str(line) + ", direction: " + direction.__class__.__name__
 
     json_file = getData(line, direction)
 
