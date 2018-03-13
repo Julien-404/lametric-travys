@@ -50,18 +50,18 @@ def lame_et_trique():
 
     return(json.dumps(getPayload(texts)))
 
-@app.route("/<line>/<direction>/stops")
+@app.route("/<line>/stops")
 def get_stops(line=None, direction=None):
     stops = ""
 
     if not line:
         return 'Données manquantes !', 422
 
-    direction = direction if not direction else 'forward'
+    direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
     json_file = getData(line, direction)
 
     for value in json_file:
-        stops.append(str(value['name']) + "<br />")
+        stops = stops + str(value['name']) + "<br />"
 
     if stops == "":
         return "Pas d'arrêt pour la ligne {} dans le sens {}".format(line, direction)
