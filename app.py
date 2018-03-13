@@ -43,8 +43,7 @@ def lame_et_trique():
                 break
 
         if len(schedule) > 0 and len(schedule['next_departures']) > 0:
-            texts.append("Ligne {}, arrêt {}".format(line, stop))
-            texts.append("Prochain bus dans {} min".format(schedule['next_departures'][0]['calculatedValue'])) 
+            texts.append("Ligne {}, arrêt {}. Prochain bus dans {} min".format(line, stop, schedule['next_departures'][0]['calculatedValue']))
         else:
             texts.append("Pas de correspondance pour la ligne {}, à l'arrêt {}".format(line, stop))
 
