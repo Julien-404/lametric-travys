@@ -34,7 +34,7 @@ def lame_et_trique():
     if not line or not stop:
         texts.append("Données fournies incorrectes.")
     else:
-        direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
+        direction = request.args.get('direction') if request.args.get('direction') else 'forward'
         json_file = getData(line, direction)
 
         for value in json_file:
@@ -57,9 +57,9 @@ def get_stops(line=None):
     if not line:
         return 'Données manquantes !', 422
 
-    direction = request.args.get('direction') if not request.args.get('direction') else 'forward'
+    direction = request.args.get('direction') if request.args.get('direction') else 'forward'
 
-    return "line: " + str(line) + ", direction: " + str(direction)
+    return "line: " + str(line) + ", direction: " + direction
 
     json_file = getData(line, direction)
 
