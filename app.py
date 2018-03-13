@@ -58,9 +58,6 @@ def get_stops(line=None):
         return 'Données manquantes !', 422
 
     direction = request.args.get('direction') if request.args.get('direction') else 'forward'
-
-    return "line: " + str(line) + ", direction: " + direction
-
     json_file = getData(line, direction)
 
     for value in json_file:
