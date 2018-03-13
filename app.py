@@ -57,7 +57,7 @@ def get_stops(line=None):
     if not line:
         return 'Données manquantes !', 422
 
-    direction = request.args.get('direction') if request.args.get('direction').__class__.__name__ == 'NoneType' else 'forward'
+    direction = request.args.get('direction') if request.args.get('direction').__class__.__name__ not 'NoneType' else 'forward'
 
     return "line: " + str(line) + ", direction: " + str(direction)
 
