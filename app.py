@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import Flask, request
 import urllib3, json, ssl
 app = Flask(__name__)
