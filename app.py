@@ -2,6 +2,7 @@ from flask import Flask, request
 import urllib3, json, ssl
 app = Flask(__name__)
 
+
 BASE_URL = "https://www.travys.ch/wp-json/travys_tiramisu/v1/iv/lines"
 ICON = "i19110"
 

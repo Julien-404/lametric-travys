@@ -1,3 +1,4 @@
-FROM python:rc-alpine
+FROM python:3
 COPY . /app
-CMD python /app/app.py
+RUN pip install flask urllib3
+CMD ["./app/app.py"]
